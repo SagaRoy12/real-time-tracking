@@ -20,4 +20,27 @@ if(navigator.geolocation){
 }
 
 // from the leaflet in the index we got a map that gives us sertain things
-L.map("map").setView([0 , 0])
+const map = L.map("map").setView([0 , 0] , 16)     // 0,0 are centered lat and long in earth and 10 is level of zoom i want
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" , {
+    attribution : "real map"
+}).addTo(map) // z,y,x are the dynamic values put by openstreet to let us see the tyle of map
+
+const markers ={}        // emptey nmarker object
+
+socket.on("received-location" , function(data){
+    const {id , latitude , longitude} = data   // extraction of the data
+    map.setView([latitude , longitude])
+    if(markers[id]){
+        markers[id].setLatLng([latitude , longitude])
+    }
+    else{
+        markers[id] = L.marker([latitude , longitude]).addTo(map)
+    }
+})
+
+socket.on("user-disconnected" , function(id){    // removing the marker when the user is disconnected ,handelled in backend by the event 'user-disconnected'
+    if(markers[id]){
+        map.removeLayer(markers[id])
+            delete markers[id]
+    }
+})

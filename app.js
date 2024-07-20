@@ -14,7 +14,7 @@ app.set(express.static(path.join(__dirname, "public")))
 // io connection handeling
 io.on("connection" , function(socket){
     socket.on("send-location" , function(data){     // handeling the front end 'send-location' event
-        io.emit("received-location" , {id: Socket.id , ...data})    // sending back all the data to all the users with io.emit
+        io.emit("received-location" , {id: Socket.id , ...data})    // sending back all the data to all the users with io.emit front end
     })
     socket.on("disconnected" , function(){
         io.emit("user-disconnected" , socket.id)

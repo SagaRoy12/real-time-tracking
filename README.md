@@ -60,7 +60,10 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature-name`).
 5. Open a pull request.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+## Technologies Used
 
+- **Node.js**: A runtime environment for executing JavaScript code server-side.
+- **Express.js**: A web application framework for Node.js, used to build the backend API.
+- **Socket.IO**: Enables real-time, bidirectional communication between the client and server.
+- **Leaflet CDN**: A JavaScript library for interactive maps, used for geospatial data visualization.
 

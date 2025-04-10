@@ -35,7 +35,13 @@ socket.on("received-location" , function(data){
         // Add a new marker and center the map for new users
         markers[id] = L.marker([latitude, longitude]).addTo(map);
         markers[id].bindPopup(`User ID: ${id}`).openPopup(); // Popup with user ID
-        
+         // Add a circle around the marker
+         circles[id] = L.circle([latitude, longitude], {
+            radius: 50, // Radius in meters
+            color: "green", // Circle border color
+            fillColor: "lightblue", // Circle fill color
+            fillOpacity: 5, // Opacity of the fill
+        }).addTo(map);
         map.setView([latitude, longitude], 15); // Center map on the new user
     } else {
         // Update the marker position for existing users

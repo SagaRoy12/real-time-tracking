@@ -42,8 +42,12 @@ socket.on("received-location" , function(data){
 })
 
 socket.on("user-disconnected" , function(id){    // removing the marker when the user is disconnected ,handelled in backend by the event 'user-disconnected'
+    console.log(`User disconnected: ${id}`); // Debug log
     if(markers[id]){
         map.removeLayer(markers[id]);
             delete markers[id]; // deleting the marker from the markers object
+            console.log(`Marker for user ${id} removed`); // Debug log
+    } else {
+        console.log(`No marker found for user ${id}`); // Debug log
     }
 })

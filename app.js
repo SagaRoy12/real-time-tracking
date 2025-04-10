@@ -16,7 +16,7 @@ io.on("connection" , function(socket){
     socket.on("send-location" , function(data){     // handeling the front end 'send-location' event
         io.emit("received-location" , {id: socket.id , ...data})    // sending back all the data to all the users with io.emit front end
     })
-    socket.on("disconnected" , function(){
+    socket.on("disconnect" , function(){ // corrected event name from 'disconnected' to 'disconnect'
         io.emit("user-disconnected" , socket.id)
     })
 })

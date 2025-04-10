@@ -27,13 +27,15 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" , {
 }).addTo(map) // z,y,x are the dynamic values put by openstreet to let us see the tyle of map
 
 const markers ={}        // emptey nmarker object
-
+const circles ={}        // empty circle object
 socket.on("received-location" , function(data){
     const {id , latitude , longitude} = data   // extraction of the data
     map.setView([latitude , longitude])
     if (!markers[id]) {
         // Add a new marker and center the map for new users
         markers[id] = L.marker([latitude, longitude]).addTo(map);
+        markers[id].bindPopup(`User ID: ${id}`).openPopup(); // Popup with user ID
+        
         map.setView([latitude, longitude], 15); // Center map on the new user
     } else {
         // Update the marker position for existing users
